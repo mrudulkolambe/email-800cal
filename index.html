@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Forget Password</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -23,7 +23,8 @@
 			let url = new URL(window.location);
 			let search_params = url.searchParams;
 			const password = document.getElementById("password");
-			axios({
+			if(search_params.get('id')){
+				axios({
 				method: 'PATCH',
 				url: 'https://800cal-backend.vercel.app/customer/reset-password',
 				headers: { 'Authorization': `Bearer ${search_params.get('id')}` },
@@ -37,6 +38,9 @@
 			.catch((err) => {
 				console.log(err)
 			})
+			}else{
+				alert("Unauthorized Access!")
+			}
 		}
 	</script>
 </body>
